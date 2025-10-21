@@ -35,12 +35,27 @@ A lightweight Express API powers the memo feature used in the backend developer 
 
 1. Install dependencies with `npm install`.
 2. Start the project with `npm start` (runs the React app and Express server together).
-3. Interact with the API using your preferred REST client:
+3. Interact with the API using your preferred REST client. Examples with `curl`:
 
 ```bash
+# Create a note (POST /notes)
 curl -X POST http://localhost:3099/notes \
 	-H "Content-Type: application/json" \
 	-d '{"title":"First note","content":"Remember to hydrate."}'
+
+# Retrieve all notes (GET /notes)
+curl http://localhost:3099/notes
+
+# Retrieve a note by ID (GET /notes/:id)
+curl http://localhost:3099/notes/1
+
+# Update a note by ID (PUT /notes/:id)
+curl -X PUT http://localhost:3099/notes/1 \
+	-H "Content-Type: application/json" \
+	-d '{"title":"Updated title"}'
+
+# Delete a note by ID (DELETE /notes/:id)
+curl -X DELETE http://localhost:3099/notes/1
 ```
 
 ## Docker Compose
