@@ -1,0 +1,18 @@
+# Backend service Dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install dependencies first (allows better Docker caching)
+COPY package.json package-lock.json* ./
+RUN npm install --omit=dev
+
+# Copy project files
+COPY contracts ./contracts
+COPY README.md ./
+
+# Expose API port
+ENV PORT=3099
+EXPOSE 3099
+
+CMD ["npm", "run", "start:server"]

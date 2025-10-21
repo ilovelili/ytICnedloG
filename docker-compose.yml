@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: goldencity-backend
+    ports:
+      - "3099:3099"
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: goldencity-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
